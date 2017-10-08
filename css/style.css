@@ -1,0 +1,82 @@
+html, body {
+	height: 100%;
+}
+
+#content {
+	min-height: 100%; 
+	height: auto !important; /*Cause footer to stick to bottom in IE 6*/
+	height: 100%; 
+	margin: 0 auto -60px; /*Allow for footer height*/
+	vertical-align:bottom;
+}
+
+#footer, #push {
+	height: 60px; /*Push must be same height as Footer */
+}
+			
+
+#description {
+	width: 88%;
+	text-align: center;
+	color: white;
+	margin-top: 30vh;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 6vh;
+	padding: 5px;
+	text-shadow: -1px -1px 0 #000,  1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#slideshowDescription, .description {
+	font-size: 5vh!important;
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+	#background {
+		max-width: 100%;
+		height: 100%;
+	}
+	
+	#description {
+		margin-top: 20vh;
+		font-size: 4vh!important;
+	}
+	
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+	#background {
+		max-width: 100%;
+		height: 100%;
+	}
+	
+	#description {
+		margin-top: 20vh;
+		font-size: 6vh!important;
+	}
+	
+}
+
+#background {
+	max-height: 100%;
+	width: 100%;
+}
+
+.background {
+	position: relative;
+}
+
+.background .row {
+	position: absolute;
+}
+
+.green {
+	width: 150px;
+	margin-right: 15px;
+}
+
+.img-fluid {
+	margin-left: auto;
+	margin-right: auto;
+}

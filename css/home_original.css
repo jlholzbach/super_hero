@@ -1,0 +1,40 @@
+#description {
+	width: 88%;
+	text-align: center;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 6vh;
+	padding: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+	#background {
+		max-width: 100%;
+		height: 100%;
+	}
+	
+	#description {
+		margin-top: 20vh;
+		font-size: 4vh!important;
+	}
+	
+}
+
+#background {
+	max-height: 100%;
+	width: 100%;
+}
+
+.background {
+	position: relative;
+}
+
+.background .row {
+	position: absolute;
+}
+
+.green {
+	width: 150px;
+	margin-right: 15px;
+}
