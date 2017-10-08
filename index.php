@@ -37,9 +37,9 @@
 				
 					<button class='green btn btn-lg btn-success'>Register</button>
 					<button class='green btn btn-lg btn-success'>Log-In</button>
-					<!--<button class='green btn btn-lg btn-success'>Deploy Test</button>
+					<button class='green btn btn-lg btn-success'>Deploy Test</button>
 					<button class='green btn btn-lg btn-success'>Another Deploy Test</button>
-					<button class='green btn btn-lg btn-success'>Another Deploy Test</button>-->
+					<button class='green btn btn-lg btn-success'>Another Deploy Test</button>
 				</div>
 				
 			</div>
