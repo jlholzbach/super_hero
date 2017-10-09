@@ -34,12 +34,31 @@
 
   <!--background-image: url(images/pattern.png)-->
 
-	<body style='background: url(images/pattern.jpg)'>
+	<body>
 		<div id="content">
 			<? include "navigation.php"; ?>
 
+			<div id="infoModal" class="modal fade">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 id="infoTitle" class="modal-title"></h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <img id="infoImage" />
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
 			<div class="background container-fluid" style="min-height: 90%;">
-				<h2 class="description" style='text-shadow: -1px -1px 0 #000,  1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; color: white; text-align: center;'>Archive of Entertainment</h2>
+				<h2 class="description">Archive of Entertainment</h2>
 				<!--#3989e5-->
 				<!--#009933-->
 				<!--#009999-->
@@ -123,7 +142,7 @@
 												echo "<div class='row entertainmentContainer'>";
 											}
 
-											echo "<div class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+											echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
 												echo "<span class='title'>".stripslashes($row['name'])."</span>";
 
 												echo "<div style='font-size: 14px; margin-left: 30px;'>";
@@ -187,7 +206,7 @@
 												echo "<div class='row entertainmentContainer'>";
 											}
 
-											echo "<div class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+											echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
 												echo "<span class='title'>".stripslashes($row['name'])."</span>";
 
 												echo "<div style='font-size: 14px; margin-left: 30px;'>";
@@ -228,7 +247,7 @@
 												echo "<div class='row entertainmentContainer'>";
 											}
 
-											echo "<div class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+											echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
 												echo "<span class='title'>".stripslashes($row['name'])."</span>";
 
 												echo "<div style='font-size: 14px; margin-left: 30px;'>";
@@ -275,79 +294,27 @@
 			<div id="push"></div>
 		</div>
 
-		<style>
-			.display {
-				background: white;
-				border-radius: 25px;
-				font-size: 18px;
-				width: 95px;
-			}
-
-			.activeBtn {
-				background: black!important;
-				color: white!important;
-				border-color: black!important;
-			}
-
-			#displayShows {
-					border: 2px solid #3989e5;
-					color: #3989e5;
-			}
-
-			#displayAll {
-				border: 2px solid #009933;
-				color: #009933;
-			}
-
-			#displayMovies {
-					border: 2px solid #009999;
-					color: #009999;
-			}
-
-			@media only screen
-			  and (min-device-width: 320px)
-			  and (max-device-width: 480px)
-			  and (orientation: portrait) {
-					.side .inner-addon{
-						margin-left: auto;
-						margin-right: auto;
-					}
-			}
-
-			@media only screen
-				and (min-device-width: 320px)
-				and (max-device-width: 667px)
-				and (orientation: landscape) {
-					.side {
-						width: 50%;
-					}
-
-					.side .inner-addon{
-							padding-left: 15px;
-					}
-			}
-
-			@media only screen
-				and (min-device-width: 414px)
-				and (max-device-width: 736px)
-				and (orientation: landscape) {
-					.side {
-						width: 50%;
-					}
-
-					.side .inner-addon{
-							padding-left: 15px;
-					}
-
-			}
-
-		</style>
-
 		<? include "footer.php"; ?>
 
 		<script type="text/javascript">
 			  var all, shows, movies, allList, moviesList, showsList;
 				var searchCount = 0;
+
+				/*$(".entertainment").click(function() {
+					var id = $(this).attr("id");
+
+					$.ajax({
+						url: 'ajax/getInformation.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {id: id},
+						success: function(info) {
+								console.log(info);
+						}
+					});
+
+					$("#infoModal").modal("show");
+				});*/
 
 				$(".display").click(function() {
 					$(".display").removeClass("activeBtn");
@@ -369,7 +336,7 @@
 					movies = "";
 
 					$.ajax({
-						url: 'filter_entertainment.php',
+						url: 'ajax/filter_entertainment.php',
 						type: 'POST',
 						dataType: 'json',
 						data: {search: $("#search").val()},
@@ -385,7 +352,7 @@
 									all += "<div class='row entertainmentContainer'>";
 								}
 
-								all += "<div class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+								all += "<div id='"+allList[i]['id']+"' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
 									all += "<span class='title'>"+ allList[i]['name'] +"</span>";
 
 									all += "<div style='font-size: 14px; margin-left: 30px;'>";
@@ -438,7 +405,7 @@
 									movies += "<div class='row entertainmentContainer'>";
 								}
 
-								movies += "<div class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+								movies += "<div id='"+moviesList[i]['id']+"' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
 									movies += "<span class='title'>"+ moviesList[i]['name'] +"</span>";
 
 									movies += "<div style='font-size: 14px; margin-left: 30px;'>";
@@ -469,7 +436,7 @@
 									shows += "<div class='row entertainmentContainer'>";
 								}
 
-								shows += "<div class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+								shows += "<div id='"+showsList[i]['id']+"' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
 									shows += "<span class='title'>"+ showsList[i]['name'] +"</span>";
 
 									shows += "<div style='font-size: 14px; margin-left: 30px;'>";

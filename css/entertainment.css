@@ -1,3 +1,94 @@
+body {
+  background: url(../images/pattern2.jpg);
+}
+
+.display {
+  background: white!important;
+  border-radius: 25px!important;
+  font-size: 18px!important;
+  width: 95px;
+}
+
+.activeBtn {
+  background: black!important;
+  color: white!important;
+  border-color: black!important;
+}
+
+#displayShows {
+    border: 2px solid #c32525;
+    color: #c32525;
+}
+
+#displayAll {
+  border: 2px solid orangered;
+  color: orangered;
+}
+
+#displayMovies {
+    border: 2px solid #8f238f;
+    color: #8f238f;
+}
+
+/*#displayShows {
+    border: 2px solid #3989e5;
+    color: #3989e5;
+}
+
+#displayAll {
+  border: 2px solid #009933;
+  color: #009933;
+}
+
+#displayMovies {
+    border: 2px solid #009999;
+    color: #009999;
+}*/
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (orientation: portrait) {
+    .side .inner-addon{
+      margin-left: auto;
+      margin-right: auto;
+    }
+}
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 667px)
+  and (orientation: landscape) {
+    .side {
+      width: 50%;
+    }
+
+    .side .inner-addon{
+        padding-left: 15px;
+    }
+}
+
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (orientation: landscape) {
+    .side {
+      width: 50%;
+    }
+
+    .side .inner-addon{
+        padding-left: 15px;
+    }
+
+}
+
+.description {
+  text-shadow: -1px -1px 0 #000,  1px -1px 0 #000,
+  -1px 1px 0 #000, 1px 1px 0 #000;
+  color: white;
+  text-align: center;
+}
+
 .inner-addon {
   width: 225px;
   position: relative;

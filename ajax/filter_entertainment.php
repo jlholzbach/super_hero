@@ -1,5 +1,5 @@
 <?
-    include "dbConnect.php";
+    include "../dbConnect.php";
 
     $search = "%" . $_POST['search'] . "%";
 
