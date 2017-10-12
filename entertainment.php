@@ -10,7 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Super Hero Fan Club</title>
 
-		<link rel="stylesheet"  href="css/style.css">
+		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/entertainment.css" />
 
 		<!-- Latest compiled and minified CSS -->
@@ -41,17 +41,24 @@
 			<div id="infoModal" class="modal fade">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 id="infoTitle" class="modal-title"></h5>
+			      <div class="modal-header" style='border-bottom: none; padding-bottom: 0px!important;'>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <img id="infoImage" />
+							<h3 id="infoTitle" class="modal-title" style='text-align: center;'></h3>
+							<h4 id="infoStart" style='text-align: center; margin: 0px!important;'></h4>
+
+							<br />
+							<img id="infoImage" style='display: block; margin-left: auto; margin-right: auto;'/>
+							<br />
+
+							<p id="infoDescription"></p>
+
 			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <div class="modal-footer" style='border-top: none;'>
+			        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
 			      </div>
 			    </div>
 			  </div>
@@ -198,7 +205,7 @@
 								<div>
 									<?
 										$count = 0;
-										$query = "SELECT * from entertainment ORDER BY name, start ASC, current ASC";
+										$query = "SELECT * from entertainment WHERE movie = true ORDER BY name, start ASC, current ASC";
 										$result = $db->query($query);
 
 										while($row = $result->fetch_assoc()){
@@ -300,8 +307,9 @@
 			  var all, shows, movies, allList, moviesList, showsList;
 				var searchCount = 0;
 
-				/*$(".entertainment").click(function() {
+				$(".entertainment").click(function() {
 					var id = $(this).attr("id");
+					console.log(id);
 
 					$.ajax({
 						url: 'ajax/getInformation.php',
@@ -310,11 +318,18 @@
 						data: {id: id},
 						success: function(info) {
 								console.log(info);
+
+								if (info != "") {
+										$("#infoTitle").html(info.show['name']);
+										$("#infoImage").attr("src", info.show['image'].medium);
+										$("#infoDescription").html(info.show['summary']);
+										$("#infoStart").html("Premiered: " + info.show['premiered']);
+										$("#infoModal").modal("show");
+								}
 						}
 					});
 
-					$("#infoModal").modal("show");
-				});*/
+				});
 
 				$(".display").click(function() {
 					$(".display").removeClass("activeBtn");

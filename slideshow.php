@@ -13,8 +13,6 @@
 		$captions[] = $row['caption'];
 	}
 
-
-	//$images = array(array("image" => "hero0.jpg", "caption" => "Test 1"), array("image" => "hero1.jpg", "caption" => "Test 2"));
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +24,11 @@
 		<title>Super Hero Fan Club</title>
 
 		<link rel="stylesheet"  href="css/style.css">
+		<link rel="stylesheet"  href="css/slideshow.css" />
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 
 		<!-- jQuery library -->
@@ -36,115 +38,7 @@
 		<!--Sizes container inside content div based on window size-->
 		<script src="js/resizeSlideshow.js"></script>
 
-		<script>
-			/*var body, navigation, footer, container, size;
-			var title, slide;
-
-			$(document).ready(function() {
-				body = parseFloat($("body").css("height"));
-				navigation = parseFloat($("nav").css("height"));
-
-				footer = parseFloat($("footer").css("height"));
-				container = body - navigation - footer;
-				$("#main").css("height", container);
-
-				title = parseFloat($("#slideshowDescription").css("height"));
-				title += parseFloat($("#slideshowDescription").css("margin-top"));
-				title += parseFloat($("#slideshowDescription").css("margin-bottom"));
-
-				slide = container - title + "px";
-				$("#slideshow").css("height", slide);
-			});
-
-			$(window).on('resize', function(){
-				body = parseFloat($("body").css("height"));
-				navigation = parseFloat($("nav").css("height"));
-
-				footer = parseFloat($("footer").css("height"));
-				container = body - navigation - footer;
-				$("#main").css("height", container);
-
-				title = parseFloat($("#slideshowDescription").css("height"));
-				title += parseFloat($("#slideshowDescription").css("margin-top"));
-				title += parseFloat($("#slideshowDescription").css("margin-bottom"));
-
-				slide = container - title + "px";
-				$("#slideshow").css("height", slide);
-
-			});*/
-
-		</script>
-
 	</head>
-
-	<style>
-		.carousel-control {
-			background: transparent!important;
-		}
-
-		.carousel {
-			width: 100%;
-			height: 100%;
-		}
-
-		.carousel-inner {
-			width: 100%!important;
-			height: 100%;
-			margin-left: auto!important;
-			margin-right: auto!important;
-		}
-
-		.slideContainer {
-			height: 85%;
-		}
-
-		.slideSquare {
-			width: 45vh;
-			border: solid 10px black;
-			margin-left: auto;
-			margin-right: auto;
-			display: block;
-		}
-
-		.arrow {
-			max-width: 6vw;
-			position: relative;
-			top: 50%;
-			transform: translateY(-50%) rotate(180deg);
-			opacity: 1!important;
-			width: auto!important;
-		}
-
-		.arrowRight {
-			max-width: 6vw;
-			position: relative;
-			top: 50%;
-			transform: translateY(-50%);
-			opacity: 1!important;
-			width: auto!important;
-		}
-
-		#main {
-			padding-left: 0px!important;
-			padding-right: 0px!important;
-		}
-
-		@media only screen and (min-device-width: 320px)
-		and (max-device-width: 480px) and (orientation: portrait) {
-			.slideSquare {
-				width: 40vh;
-			}
-		}
-
-		.item img {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			margin-right: -50%;
-			transform: translate(-50%, -50%);
-		}
-
-	</style>
 
 	<body style='background: #1f0006;'><!--style='background: #640000;'-->
 		<div id="content">

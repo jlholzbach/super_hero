@@ -1,8 +1,7 @@
 <?
     include "../dbConnect.php";
 
-    //$id = $_POST['id'];
-    $id = 3;
+    $id = $_POST['id'];
 
     $query = "SELECT * from entertainment WHERE id = ?";
     $stmt = $db->prepare($query);
@@ -12,24 +11,30 @@
     $result = $stmt->get_result();
     $result = $result->fetch_assoc();
     $title = rawurlencode(stripslashes($result['name']));
+    $start = $result['start'];
 
-    $url = "http://api.tvmaze.com/search/shows?q=$title";
-    //$url = "http://api.tvmaze.com/shows?q=Arrow";
-    //$url2 = "http://api.tvmaze.com/search/shows?q=The%20Flash";
-    //$url = "http://api.tvmaze.com/search/shows?q=Arrow";
+    $info = "";
 
-    //echo $url;
-    //echo "<br />";
-    //echo $url2;
+    if ($result['movie'] == false) {
+      $url = "http://api.tvmaze.com/search/shows?q=$title";
+      $json = file_get_contents($url);
+    	$data = json_decode($json, TRUE);
 
-    $json = file_get_contents($url);
-  	$data = json_decode($json, TRUE);
+    	for ($x = 0; $x < count($data); $x++) {
+          $premiered =  date("Y", strtotime($data[$x]['show']['premiered']));
+          $data[$x]['show']['premiered'] = date("M. d, Y", strtotime($data[$x]['show']['premiered']));
 
-    //echo count($data);
-    //echo "<br />";
-    //print_r($data);
+          if ($premiered == $start) {
+            $info = $data[$x];
+            break;
+          }
+      }
+    }
 
-  	for ($x = 0; $x < count($data); $x++) {
+    else {
 
     }
+
+
+    echo json_encode($info);
 ?>

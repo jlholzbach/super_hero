@@ -217,6 +217,7 @@ li.active a {
   position: initial!important;
   background: white;
   width: 100%;
+  cursor: pointer;
 }
 
 .title {

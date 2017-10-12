@@ -22,13 +22,13 @@
 				<a href="entertainment.php">Archive of Entertainment</a>
 			</li>
 			<li>
-				<a href="#">Hall of Trivia</a>
+				<a href="trivia.php">Hall of Trivia</a>
 			</li>
 			<li>
-				<a href="#">Heroic Quotes</a>
+				<a href="quotes.php">Heroic Quotes</a>
 			</li>
 			<li>
-				<a href="#">Registration</a>
+				<a href="placeholder.php">Registration</a>
 			</li>
 			<li>
 				<a href="slideshow.php">Slideshow of Heroes</a>
