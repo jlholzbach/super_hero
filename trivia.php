@@ -26,7 +26,7 @@
 
 	<body>
 		<div id="content">
-			<? include "navigation.php"; ?>
+			<?php include "navigation.php"; ?>
 
 			<div class="background container-fluid">
 				<div class="row" style='text-align: center; width: 100%; height: 100%;'>
@@ -37,6 +37,6 @@
 			<div id="push"></div>
 		</div>
 
-		<? include "footer.php"; ?>
+		<?php include "footer.php"; ?>
 	</body>
 </html>

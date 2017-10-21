@@ -1,4 +1,4 @@
-<?
+<?php
 
 	include "dbConnect.php";
 
@@ -42,7 +42,7 @@
 
 	<body style='background: #1f0006;'><!--style='background: #640000;'-->
 		<div id="content">
-			<? include "navigation.php"; ?>
+			<?php include "navigation.php"; ?>
 
 			<!--background-image: url(images/curtain.jpg); -->
 			<div id="main" class="background container-fluid" style='background-image: url(images/curtain.jpg); background-size: 100% 100%;'>
@@ -58,7 +58,7 @@
 							<div class="slideSquare" style='height: 60%; background: white; text-align: center;'>
 								<div class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
 									<div class="carousel-inner" role="listbox">
-										<?
+										<?php
 											$count = 0;
 
 											foreach($images as $val) {
@@ -83,7 +83,7 @@
 
 							<div style="height: 40%;" class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
 								<div class="carousel-inner" role="listbox">
-									<?
+									<?php
 										$count = 0;
 
 										foreach($captions as $val) {
@@ -115,6 +115,6 @@
 			</div>
 		</div>
 
-		<? include "footer.php"; ?>
+		<?php include "footer.php"; ?>
 	</body>
 </html>

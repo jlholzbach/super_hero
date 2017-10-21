@@ -26,7 +26,7 @@
 
 	<body style='background: #7fd2db;'>
 		<div id="content">
-			<? include "navigation.php"; ?>
+			<?php include "navigation.php"; ?>
 
 			<div class="background container-fluid">
 				<div class="row" style='width: 100%; height: 100%;'>
@@ -47,10 +47,10 @@
 
 			</div>
 
-			<div id="push"></div>
+			<!--<div id="push"></div>-->
 		</div>
 
-		<? include "footer.php"; ?>
+		<?php include "footer.php"; ?>
 
 	</body>
 </html>
