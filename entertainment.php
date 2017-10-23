@@ -269,29 +269,24 @@
 		</style>
 
 		<script type="text/javascript">
-			var all, shows, movies, allList, moviesList, showsList, scrollTop;
+			var all, shows, movies, allList, moviesList, showsList, scrollTop, cssTop;
 			var searchCount = 0;
 
 			$(document).ready(function() {
-				/*$('#infoModal').on('show.bs.modal', function() {
-					alert("Does this do anything?");
-					scrollTop = $("body").scrollTop();
-					console.log(scrollTop);
+				$('#infoModal').on('show.bs.modal', function() {
+					cssTop = "-" + scrollTop + "px";
+					$("body").css("top", cssTop);
 				});
 
-				$('#infoModal').on('shown.bs.modal', function() {
-					$("body").css("overflow","hidden").css("position","fixed");
+				//Doesnt work in Firefox wihout event as an argument
+				$('#infoModal').on('hidden.bs.modal', function (event) {
+					$("body").css("top","unset");
+					$(document).scrollTop(scrollTop);
 				});
-
-				$('#infoModal').on('hidden.bs.modal', function (e) {
-					$("body").css("overflow","auto").css("position","initial");
-				});*/
-
 			});
 
 			$(".entertainment").click(function() {
 				var id = $(this).attr("id");
-				console.log(id);
 
 				$.ajax({
 					url: 'ajax/getInformation.php',
@@ -307,7 +302,10 @@
 								$("#infoImage").attr("src", info.show['image'].medium);
 								$("#infoDescription").html(info.show['summary']);
 								$("#infoStart").html("Premiered: " + info.show['premiered']);
+
+ 								scrollTop = $(document).scrollTop();
 								$("#infoModal").modal("show");
+								//$(document).scrollTop(scrollTop);
 							}
 
 							else {
@@ -315,7 +313,10 @@
 								$("#infoImage").attr("src", "http://image.tmdb.org/t/p/w500/" + info.backdrop_path);
 								$("#infoDescription").html(info.overview);
 								$("#infoStart").html("Premiered: " + info.release_date);
+
+								scrollTop = $(document).scrollTop();
 								$("#infoModal").modal("show");
+								//$(document).scrollTop(scrollTop);
 							}
 						}
 					}
