@@ -276,11 +276,13 @@
 				$('#infoModal').on('show.bs.modal', function() {
 					cssTop = "-" + scrollTop + "px";
 					$("body").css("top", cssTop);
+					$("body").css("background-position","0px " + cssTop);
 				});
 
 				//Doesnt work in Firefox wihout event as an argument
 				$('#infoModal').on('hidden.bs.modal', function (event) {
 					$("body").css("top","unset");
+					$("body").css("background-position","0px 0px");
 					$(document).scrollTop(scrollTop);
 				});
 			});

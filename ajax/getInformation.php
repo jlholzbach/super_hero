@@ -1,4 +1,4 @@
-<?
+<?php
     include "../dbConnect.php";
 
     $id = $_POST['id'];
@@ -30,7 +30,7 @@
 			break;
 		  }
 		}
-    }
+  }
 
 	else {
 		$url = "https://api.themoviedb.org/3/search/movie?api_key=0dc27c28fd9861490258f2d1b59ae383&query=$title";
