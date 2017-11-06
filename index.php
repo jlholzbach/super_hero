@@ -7,6 +7,7 @@
 		<title>Super Hero Fan Club</title>
 
 		<link rel="stylesheet"  href="css/style.css">
+		<link rel="stylesheet" href="css/home.css">
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 
@@ -18,39 +19,86 @@
 
 		<!-- Latest compiled JavaScript -->
 		<script src="js/bootstrap.min.js"></script>
-
-		<!--Sizes container inside content div based on window size-->
-		<script src="js/resize.js"></script>
-
 	</head>
-
-	<body style='background: #7fd2db;'>
+  <body>
 		<div id="content">
 			<?php include "navigation.php"; ?>
 
-			<div class="background container-fluid">
-				<div class="row" style='width: 100%; height: 100%;'>
-					<img id="background" src='images/background.jpg' />
+			<header id="index">
+				<div id="message">
+					<div class="container">
+						<h1 class="fontBig white">Super Hero Fan Club</h1>
+						<h3 class="fontMedium white">A Celebration of all things Super Hero</h3>
+
+						<hr>
+
+						<a href="placeholder.php" style='text-decoration: none; margin-right: 15px;'>
+							<button class='btn btn-lg'>Register</button>
+						</a>
+
+						<a href="placeholder.php" style='text-decoration: none;'>
+							<button class='btn btn-lg'>Login</button>
+						</a>
+
+					</div>
 				</div>
+			</header>
 
-				<div class="row" style='text-align: center; width: 100%; height: 100%;'>
-					<h2 id='description'>This is a club for fans of Super Heroes, especially those have been in Television Series or Movies, in the past 25 years.</h2>
+			<div id="options">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<a href="entertainment.php">
+											<div class="option">
+												<div class="imageContainer">
+													<img src="images/entertainment2.png" alt="Entertainment">
+												</div>
+												<div class="text">
+														<h3 style='margin-top: 0px!important; text-align: center;'>Archive of Entertainment</h3>
+														<p>
+															View an archive of movies and tv shows beginning in the 1990s.
+															Click your favorites for more information.
+														</p>
+												</div>
+											</div>
+										</a>
+								</div>
 
-					<a href="placeholder.php" style='text-decoration: none;'>
-						<button class='green btn btn-lg btn-success'>Register</button>
-					</a>
+								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<a href="slideshow.php">
+										<div class="option">
+											<div class="imageContainer">
+												<img src="images/slideshow.png" alt="Slideshow">
+											</div>
+											<div class="text">
+													<h3 style='margin-top: 0px!important; text-align: center;'>Slideshow of Heroes</h3>
+													<p>
+															Check back often for new heroes.
+															<br />
+															<b>Coming soon:</b>
+															<br />
+															<span>The ability to chose slideshows</span>
+													</p>
+											</div>
+										</div>
+									</a>
+								</div>
 
-					<a href="placeholder.php" style='text-decoration: none;'>
-						<button class='green btn btn-lg btn-success'>Login</button>
-					</a>
+								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
-
 			</div>
 
-			<!--<div id="push"></div>-->
-		</div>
+    </div>
 
-		<?php include "footer.php"; ?>
+    <?php include "footer.php"; ?>
 
-	</body>
+  </body>
 </html>
