@@ -36,7 +36,7 @@
 		<script src="js/bootstrap.min.js"></script>
 
 		<!--Sizes container inside content div based on window size-->
-		<script src="js/resizeSlideshow.js"></script>
+		<!--<script src="js/resizeSlideshow.js"></script>-->
 
 	</head>
 

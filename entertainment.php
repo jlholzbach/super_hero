@@ -30,7 +30,7 @@
 
 	<body>
 		<?php include "sidebar.php"; ?>
-		<div id="content" style="margin-bottom: -20px!important;">
+		<div id="content" style="margin-bottom: 25px!important;">
 			<div id="main">
 					<?php include "navigation.php"; ?>
 

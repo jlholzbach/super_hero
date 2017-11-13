@@ -87,7 +87,7 @@
     display: none!important;
   }
 
-  #main {
+  #main, footer {
     margin-left: 0%!important;
   }
 
