@@ -6,14 +6,14 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button id="openNav" type="button" style='float: left; margin-left: 15px;' class="navbar-toggle collapsed">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
 			</button>
 
 			<a class="navbar-brand" style='color: white; text-decoration: none;' href="index.php">
-			Super Hero Fan Club
+				Super Hero Fan Club
 			</a>
 		</div>
 
@@ -42,20 +42,25 @@
 <script type="text/javascript">
 	$("#openNav").click(function() {
 		$("#main").css("margin-left", "30%");
+		$("footer").css("margin-left", "30%");
 		$("#mySidebar").css("width","30%").css("display","block");
 		$("#openNav").css("display","none");
 		$("#myOverlay").css("display","block");
 	});
 
 	$("#closeSidebar").click(function() {
+		$("#openNav").addClass("collapsed");
 		$("#main").css("margin-left", "0%");
+		$("footer").css("margin-left", "0%");
 		$("#mySidebar").css("width","30%").css("display","none");
 		$("#openNav").css("display","inline-block");
 		$("#myOverlay").css("display","none");
 	});
 
 	$("#myOverlay").click(function() {
+		$("#openNav").addClass("collapsed");
 		$("#main").css("margin-left", "0%");
+		$("footer").css("margin-left", "0%");
 		$("#mySidebar").css("width","30%").css("display","none");
 		$("#openNav").css("display","inline-block");
 		$("#myOverlay").css("display","none");

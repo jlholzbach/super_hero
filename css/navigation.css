@@ -1,5 +1,7 @@
-#main {
+#main, footer {
   transition: margin-left .4s;
+  width: 100%;
+  overflow: hidden;
 }
 
 .icon-bar {
