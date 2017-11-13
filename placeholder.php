@@ -25,16 +25,20 @@
 	</head>
 
 	<body>
+		<?php include "sidebar.php"; ?>
+
 		<div id="content">
-			<?php include "navigation.php"; ?>
+			<div id="main">
+				<?php include "navigation.php"; ?>
 
-			<div class="background container-fluid">
-				<div class="row" style='text-align: center; width: 100%; height: 100%;'>
-					<h1>Registration/Login coming soon!</h1>
+				<div class="background container-fluid">
+					<div class="row" style='text-align: center; width: 100%; height: 100%;'>
+						<h1>Registration/Login coming soon!</h1>
+					</div>
 				</div>
-			</div>
 
-			<div id="push"></div>
+				<div id="push"></div>
+			</div>
 		</div>
 
 		<?php include "footer.php"; ?>

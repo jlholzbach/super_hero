@@ -29,234 +29,237 @@
   <!--background-image: url(images/pattern.png)-->
 
 	<body>
+		<?php include "sidebar.php"; ?>
 		<div id="content" style="margin-bottom: -20px!important;">
-			<?php include "navigation.php"; ?>
+			<div id="main">
+					<?php include "navigation.php"; ?>
 
-			<div id="infoModal" class="modal fade">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header" style='border-bottom: none; padding-bottom: 0px!important;'>
-			        <button style='font-size: 45px;' type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-							<h3 id="infoTitle" class="modal-title" style='text-align: center;'></h3>
-							<h4 id="infoStart" style='text-align: center; margin: 0px!important;'></h4>
+					<div id="infoModal" class="modal fade">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header" style='border-bottom: none; padding-bottom: 0px!important;'>
+					        <button style='font-size: 45px;' type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+									<h3 id="infoTitle" class="modal-title" style='text-align: center;'></h3>
+									<h4 id="infoStart" style='text-align: center; margin: 0px!important;'></h4>
 
-							<br />
-							<img id="infoImage" style='display: block; margin-left: auto; margin-right: auto;'/>
-							<br />
+									<br />
+									<img id="infoImage" style='display: block; margin-left: auto; margin-right: auto;'/>
+									<br />
 
-							<p id="infoDescription"></p>
+									<p id="infoDescription"></p>
 
-			      </div>
-			      <div class="modal-footer" style='border-top: none;'>
-			        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-			      </div>
-			    </div>
-			  </div>
-			</div>
-
-			<div class="background container-fluid" style="min-height: 90%;">
-				<h2 class="description">Archive of Entertainment</h2>
-
-				<div class="row" style='position: initial!important; margin-left: 0px!important; margin-right: 0px!important;'>
-					<div class="col col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
-
-					<div class="col col-lg-8 col-md-10 col-sm-10 col-xs-12">
-							<div class="row adjust" style='position: initial!important;'>
-									<div class="first col col-lg-6 col-md-6 col-sm-6 col-xs-12 side">
-										<div class="inner-addon right-addon">
-											<i class="glyphicon glyphicon-search"></i>
-											<input type="text" name="search" id="search"  placeholder="Type to Search" value="">
-										</div>
-									</div>
-
-									<div class="second col col-lg-6 col-md-6 col-sm-6 col-xs-12 side" style='margin-bottom: 10px;'>
-										<button id="displayAll" target="tabAll" type="button" class="btn display activeBtn" style='display: inline-block'>All</button>
-										<button id="displayMovies" target="tabMovies" type="button" class="btn display" style='display: inline-block'>Movies</button>
-										<button id="displayShows" target="tabShows" type="button" class="btn display" style='display: inline-block'>Shows</button>
-									</div>
-
-							</div>
+					      </div>
+					      <div class="modal-footer" style='border-top: none;'>
+					        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+					      </div>
+					    </div>
+					  </div>
 					</div>
-				</div>
 
-				<div style='display: none;'>
-					<a id="tabAll" data-toggle="tab" class="all" href="#all">All</a>
-					<a id="tabMovies" data-toggle="tab" class="movies" href="#movies">Movies</a>
-					<a id="tabShows" data-toggle="tab" class="shows" href="#shows">Shows</a>
-				</div>
+					<div class="background container-fluid" style="min-height: 90%;">
+						<h2 class="description">Archive of Entertainment</h2>
 
-				<div class="row" style='position: initial!important; margin-left: 0px!important; margin-right: 0px!important;'>
-					<div class="col col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
+						<div class="row" style='position: initial!important; margin-left: 0px!important; margin-right: 0px!important;'>
+							<div class="col col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
 
-					<div style='background: white;' class="col col-lg-8 col-md-10 col-sm-10 col-xs-10">
-						<div class="tab-content">
-							<div id="all" class="tab-pane fade in active">
-								<div>
-									<?php
-										$count = 0;
-										$query = "SELECT * from entertainment ORDER BY name, start ASC, current ASC";
-										$result = $db->query($query);
+							<div class="col col-lg-8 col-md-10 col-sm-10 col-xs-12">
+									<div class="row adjust" style='position: initial!important;'>
+											<div class="first col col-lg-6 col-md-6 col-sm-6 col-xs-12 side">
+												<div class="inner-addon right-addon">
+													<i class="glyphicon glyphicon-search"></i>
+													<input type="text" name="search" id="search"  placeholder="Type to Search" value="">
+												</div>
+											</div>
 
-										while($row = $result->fetch_assoc()){
-											if ($count == 0) {
-												echo "<div class='row entertainmentContainer'>";
-											}
+											<div class="second col col-lg-6 col-md-6 col-sm-6 col-xs-12 side" style='margin-bottom: 10px;'>
+												<button id="displayAll" target="tabAll" type="button" class="btn display activeBtn" style='display: inline-block'>All</button>
+												<button id="displayMovies" target="tabMovies" type="button" class="btn display" style='display: inline-block'>Movies</button>
+												<button id="displayShows" target="tabShows" type="button" class="btn display" style='display: inline-block'>Shows</button>
+											</div>
 
-											echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
-												echo "<span class='title btn-link'>".stripslashes($row['name'])."</span>";
-												//echo "<a href='#' class='text-danger title'>".stripslashes($row['name'])."</a>";
+									</div>
+							</div>
+						</div>
 
-												echo "<div style='font-size: 14px; margin-left: 30px;'>";
-													if ($row['movie']) {
-														echo "<i class='fa fa-film' aria-hidden='true'></i>";
+						<div style='display: none;'>
+							<a id="tabAll" data-toggle="tab" class="all" href="#all">All</a>
+							<a id="tabMovies" data-toggle="tab" class="movies" href="#movies">Movies</a>
+							<a id="tabShows" data-toggle="tab" class="shows" href="#shows">Shows</a>
+						</div>
+
+						<div class="row" style='position: initial!important; margin-left: 0px!important; margin-right: 0px!important;'>
+							<div class="col col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
+
+							<div style='background: white;' class="col col-lg-8 col-md-10 col-sm-10 col-xs-10">
+								<div class="tab-content">
+									<div id="all" class="tab-pane fade in active">
+										<div>
+											<?php
+												$count = 0;
+												$query = "SELECT * from entertainment ORDER BY name, start ASC, current ASC";
+												$result = $db->query($query);
+
+												while($row = $result->fetch_assoc()){
+													if ($count == 0) {
+														echo "<div class='row entertainmentContainer'>";
 													}
 
-													else {
-														echo "<i class='fa fa-television' aria-hidden='true'></i>";
-													}
+													echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+														echo "<span class='title btn-link'>".stripslashes($row['name'])."</span>";
+														//echo "<a href='#' class='text-danger title'>".stripslashes($row['name'])."</a>";
 
-													//echo "<span class='glyphicons glyphicons-tv' aria-hidden='true'></span>";
-													//echo "<span style='color: mediumblue; margin-right: 5px; font-size: 18px;' class='glyphicon glyphicon-film'></span>";
-
-													echo "<span style='position: relative; top: -3px;'>";
-
-														if ($row['movie']) {
-															echo $row['start'];
-														}
-
-														else {
-															if ($row['current']) {
-																echo $row['start'] . " - Present";
+														echo "<div style='font-size: 14px; margin-left: 30px;'>";
+															if ($row['movie']) {
+																echo "<i class='fa fa-film' aria-hidden='true'></i>";
 															}
 
 															else {
-																echo $row['start'] . " - " . $row['end'];
+																echo "<i class='fa fa-television' aria-hidden='true'></i>";
 															}
-														}
 
-													echo "</span>";
+															//echo "<span class='glyphicons glyphicons-tv' aria-hidden='true'></span>";
+															//echo "<span style='color: mediumblue; margin-right: 5px; font-size: 18px;' class='glyphicon glyphicon-film'></span>";
 
-												echo "</div>";
+															echo "<span style='position: relative; top: -3px;'>";
 
-											echo "</div>";
+																if ($row['movie']) {
+																	echo $row['start'];
+																}
 
-											$count++;
+																else {
+																	if ($row['current']) {
+																		echo $row['start'] . " - Present";
+																	}
 
-											if ($count == 3) {
+																	else {
+																		echo $row['start'] . " - " . $row['end'];
+																	}
+																}
+
+															echo "</span>";
+
+														echo "</div>";
+
+													echo "</div>";
+
+													$count++;
+
+													if ($count == 3) {
+														$count = 0;
+														echo "</div>";
+													}
+												}
+
+												if ($count != 0) {
+													echo "</div>";
+												}
+											?>
+										</div>
+									</div>
+
+									<div id="movies" class="tab-pane fade">
+										<div>
+											<?php
 												$count = 0;
-												echo "</div>";
-											}
-										}
+												$query = "SELECT * from entertainment WHERE movie = true ORDER BY name, start ASC, current ASC";
+												$result = $db->query($query);
 
-										if ($count != 0) {
-											echo "</div>";
-										}
-									?>
+												while($row = $result->fetch_assoc()){
+													if ($count == 0) {
+														echo "<div class='row entertainmentContainer'>";
+													}
+
+													echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+														echo "<span class='title btn-link'>".stripslashes($row['name'])."</span>";
+
+														echo "<div style='font-size: 14px; margin-left: 30px;'>";
+															echo "<i class='fa fa-film' aria-hidden='true'></i>";
+
+															echo "<span style='position: relative; top: -3px;'>";
+																echo $row['start'];
+															echo "</span>";
+
+														echo "</div>";
+
+													echo "</div>";
+
+													$count++;
+
+													if ($count == 3) {
+														$count = 0;
+														echo "</div>";
+													}
+												}
+
+												if ($count != 0) {
+													echo "</div>";
+												}
+											?>
+										</div>
+									</div>
+
+									<div id="shows" class="tab-pane fade">
+										<div>
+											<?php
+												$count = 0;
+												$query = "SELECT * from entertainment WHERE movie = false ORDER BY name, start ASC, current ASC";
+												$result = $db->query($query);
+
+												while($row = $result->fetch_assoc()){
+													if ($count == 0) {
+														echo "<div class='row entertainmentContainer'>";
+													}
+
+													echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
+														echo "<span class='title btn-link'>".stripslashes($row['name'])."</span>";
+
+														echo "<div style='font-size: 14px; margin-left: 30px;'>";
+															echo "<i class='fa fa-television' aria-hidden='true'></i>";
+
+															echo "<span style='position: relative; top: -3px;'>";
+
+																if ($row['current']) {
+																	echo $row['start'] . " - Present";
+																}
+
+																else {
+																	echo $row['start'] . " - " . $row['end'];
+																}
+
+															echo "</span>";
+
+														echo "</div>";
+
+													echo "</div>";
+
+													$count++;
+
+													if ($count == 3) {
+														$count = 0;
+														echo "</div>";
+													}
+												}
+
+												if ($count != 0) {
+													echo "</div>";
+												}
+											?>
+										</div>
+									</div>
 								</div>
 							</div>
 
-							<div id="movies" class="tab-pane fade">
-								<div>
-									<?php
-										$count = 0;
-										$query = "SELECT * from entertainment WHERE movie = true ORDER BY name, start ASC, current ASC";
-										$result = $db->query($query);
-
-										while($row = $result->fetch_assoc()){
-											if ($count == 0) {
-												echo "<div class='row entertainmentContainer'>";
-											}
-
-											echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
-												echo "<span class='title btn-link'>".stripslashes($row['name'])."</span>";
-
-												echo "<div style='font-size: 14px; margin-left: 30px;'>";
-													echo "<i class='fa fa-film' aria-hidden='true'></i>";
-
-													echo "<span style='position: relative; top: -3px;'>";
-														echo $row['start'];
-													echo "</span>";
-
-												echo "</div>";
-
-											echo "</div>";
-
-											$count++;
-
-											if ($count == 3) {
-												$count = 0;
-												echo "</div>";
-											}
-										}
-
-										if ($count != 0) {
-											echo "</div>";
-										}
-									?>
-								</div>
-							</div>
-
-							<div id="shows" class="tab-pane fade">
-								<div>
-									<?php
-										$count = 0;
-										$query = "SELECT * from entertainment WHERE movie = false ORDER BY name, start ASC, current ASC";
-										$result = $db->query($query);
-
-										while($row = $result->fetch_assoc()){
-											if ($count == 0) {
-												echo "<div class='row entertainmentContainer'>";
-											}
-
-											echo "<div id='".$row['id']."' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
-												echo "<span class='title btn-link'>".stripslashes($row['name'])."</span>";
-
-												echo "<div style='font-size: 14px; margin-left: 30px;'>";
-													echo "<i class='fa fa-television' aria-hidden='true'></i>";
-
-													echo "<span style='position: relative; top: -3px;'>";
-
-														if ($row['current']) {
-															echo $row['start'] . " - Present";
-														}
-
-														else {
-															echo $row['start'] . " - " . $row['end'];
-														}
-
-													echo "</span>";
-
-												echo "</div>";
-
-											echo "</div>";
-
-											$count++;
-
-											if ($count == 3) {
-												$count = 0;
-												echo "</div>";
-											}
-										}
-
-										if ($count != 0) {
-											echo "</div>";
-										}
-									?>
-								</div>
-							</div>
+							<div class="col col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
 						</div>
+
 					</div>
 
-					<div class="col col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
-				</div>
-
+					<div id="push"></div>
 			</div>
-
-			<div id="push"></div>
 		</div>
 
 		<?php include "footer.php"; ?>

@@ -41,77 +41,80 @@
 	</head>
 
 	<body style='background: #1f0006;'><!--style='background: #640000;'-->
+		<?php include "sidebar.php"; ?>
+
 		<div id="content">
-			<?php include "navigation.php"; ?>
+			<div id="main">
+					<?php include "navigation.php"; ?>
 
-			<!--background-image: url(images/curtain.jpg); -->
-			<div id="main" class="background container-fluid" style='background-image: url(images/curtain.jpg); background-size: 100% 100%;'>
-				<div class="row" style='margin-left: 0px!important; margin-right: 0px!important; width: 100%; height: 100%;'>
-					<h2 id="slideshowDescription" style='text-align: center; color: white;'>Slideshow of Heroes</h2>
+					<div id="mainSlide" class="background container-fluid" style='background-image: url(images/curtain.jpg); background-size: 100% 100%;'>
+						<div class="row" style='margin-left: 0px!important; margin-right: 0px!important; width: 100%; height: 100%;'>
+							<h2 id="slideshowDescription" style='text-align: center; color: white;'>Slideshow of Heroes</h2>
 
-					<div id="slideshow">
-						<div style='width: 15%; float: left; height: 100%;'>
-							<img src="images/arrow3.png" class="arrow carousel-control" href=".carousel" data-slide="prev" style='margin-left: auto; margin-right: auto; display: block;'/>
-						</div>
+							<div id="slideshow">
+								<div style='width: 15%; float: left; height: 100%;'>
+									<img src="images/arrow3.png" class="arrow carousel-control" href=".carousel" data-slide="prev" style='margin-left: auto; margin-right: auto; display: block;'/>
+								</div>
 
-						<div style='width: 70%; height: 100%; float: left;'>
-							<div class="slideSquare" style='height: 60%; background: white; text-align: center;'>
-								<div class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-									<div class="carousel-inner" role="listbox">
-										<?php
-											$count = 0;
+								<div style='width: 70%; height: 100%; float: left;'>
+									<div class="slideSquare" style='height: 60%; background: white; text-align: center;'>
+										<div class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+											<div class="carousel-inner" role="listbox">
+												<?php
+													$count = 0;
 
-											foreach($images as $val) {
-												if ($count == 0) {
-													$class = "item active";
+													foreach($images as $val) {
+														if ($count == 0) {
+															$class = "item active";
+														}
+
+														else {
+															$class = "item";
+														}
+
+														echo "<div class='$class' style='height: 100%;'>";
+															echo "<img style='max-width: 100%;' class='img-fluid' src='images/$val' />";
+														echo "</div>";
+
+														$count++;
+													}
+												?>
+											</div>
+										</div>
+									</div>
+
+									<div style="height: 40%;" class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+										<div class="carousel-inner" role="listbox">
+											<?php
+												$count = 0;
+
+												foreach($captions as $val) {
+													if ($count == 0) {
+														$class = "item active";
+													}
+
+													else {
+														$class = "item";
+													}
+
+													echo "<div class='$class' style='height: 100%;'>";
+														echo "<h3 style='color: white; font-size: 3.5vh!important; margin-top: 5px!important; margin-bottom: 5px!important; text-align: center;'>$val</h3>";
+													echo "</div>";
+
+													$count++;
 												}
-
-												else {
-													$class = "item";
-												}
-
-												echo "<div class='$class' style='height: 100%;'>";
-													echo "<img style='max-width: 100%;' class='img-fluid' src='images/$val' />";
-												echo "</div>";
-
-												$count++;
-											}
-										?>
+											?>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div style="height: 40%;" class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-								<div class="carousel-inner" role="listbox">
-									<?php
-										$count = 0;
-
-										foreach($captions as $val) {
-											if ($count == 0) {
-												$class = "item active";
-											}
-
-											else {
-												$class = "item";
-											}
-
-											echo "<div class='$class' style='height: 100%;'>";
-												echo "<h3 style='color: white; font-size: 3.5vh!important; margin-top: 5px!important; margin-bottom: 5px!important; text-align: center;'>$val</h3>";
-											echo "</div>";
-
-											$count++;
-										}
-									?>
+								<div style='width: 15%; float: left; height: 100%;'>
+									<img src="images/arrow3.png" class="arrowRight carousel-control" href=".carousel" data-slide="next"  style='margin-left: auto; margin-right: auto; display: block;'/>
 								</div>
 							</div>
 						</div>
 
-						<div style='width: 15%; float: left; height: 100%;'>
-							<img src="images/arrow3.png" class="arrowRight carousel-control" href=".carousel" data-slide="next"  style='margin-left: auto; margin-right: auto; display: block;'/>
-						</div>
 					</div>
-				</div>
-
 			</div>
 		</div>
 
