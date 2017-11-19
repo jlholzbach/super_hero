@@ -1,18 +1,21 @@
 <?php
-
 	include "dbConnect.php";
 
-	$images = array();
-	$captions = array();
-
-	$query = "SELECT * from slideshow";
-	$result = $db->query($query);
-
-	while($row = $result->fetch_assoc()){
-		$images[] = $row['image'];
-		$captions[] = $row['caption'];
+	if (!isset($_GET['id'])) {
+		$id = 1;
 	}
 
+	else {
+		$id = $_GET['id'];
+	}
+
+	$query = "SELECT `title` FROM `gallery` WHERE `id` = ?";
+	$statement = $db->prepare($query);
+	$statement->bind_param("i", $id);
+	$statement->execute();
+	$statement->bind_result($title);
+	$statement->fetch();
+	$statement->free_result();
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +27,7 @@
 		<title>Super Hero Fan Club</title>
 
 		<link rel="stylesheet"  href="css/style.css">
-		<link rel="stylesheet"  href="css/slideshow.css" />
+		<!--<link rel="stylesheet"  href="css/slideshow.css" />-->
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 
@@ -33,91 +36,67 @@
 
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 		<script src="js/bootstrap.min.js"></script>
 
-		<!--Sizes container inside content div based on window size-->
-		<!--<script src="js/resizeSlideshow.js"></script>-->
-
+		<script src='unitegallery/js/unitegallery.js'></script>
+		<link rel='stylesheet' href='unitegallery/css/unite-gallery.css' type='text/css' />
+	  <script type='text/javascript' src='unitegallery/themes/grid/ug-theme-grid.js'></script>
+	  <link rel='stylesheet' href='unitegallery/themes/default/ug-theme-grid.css' type='text/css' />
+		<link rel='stylesheet' 	href='unitegallery/skins/alexis/alexis.css' type='text/css' />
 	</head>
 
-	<body style='background: #1f0006;'><!--style='background: #640000;'-->
+	<body>
 		<?php include "sidebar.php"; ?>
+
+		<style>
+			#content {
+				background-image: url(images/slideshow.jpg);
+				background-size: cover;
+			}
+		</style>
 
 		<div id="content">
 			<div id="main">
 					<?php include "navigation.php"; ?>
 
-					<div id="mainSlide" class="background container-fluid" style='background-image: url(images/curtain.jpg); background-size: 100% 100%;'>
-						<div class="row" style='margin-left: 0px!important; margin-right: 0px!important; width: 100%; height: 100%;'>
-							<h2 id="slideshowDescription" style='text-align: center; color: white;'>Slideshow of Heroes</h2>
+					<h2 id="slideshowDescription" style='text-align: center; color: white;'><?php echo $title; ?></h2>
 
-							<div id="slideshow">
-								<div style='width: 15%; float: left; height: 100%;'>
-									<img src="images/arrow3.png" class="arrow carousel-control" href=".carousel" data-slide="prev" style='margin-left: auto; margin-right: auto; display: block;'/>
-								</div>
+					<div id="gallery" style="margin-bottom: 150px; display:none; margin-left: auto; margin-right: auto;">
+							<?php
+									$query = "SELECT `image`, `caption` FROM `gallery_image` WHERE `gallery_id` = ?";
+									$statement = $db->prepare($query);
+									$statement->bind_param("i", $id);
+									$statement->execute();
+									$statement->bind_result($image, $caption);
 
-								<div style='width: 70%; height: 100%; float: left;'>
-									<div class="slideSquare" style='height: 60%; background: white; text-align: center;'>
-										<div class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-											<div class="carousel-inner" role="listbox">
-												<?php
-													$count = 0;
-
-													foreach($images as $val) {
-														if ($count == 0) {
-															$class = "item active";
-														}
-
-														else {
-															$class = "item";
-														}
-
-														echo "<div class='$class' style='height: 100%;'>";
-															echo "<img style='max-width: 100%;' class='img-fluid' src='images/$val' />";
-														echo "</div>";
-
-														$count++;
-													}
-												?>
-											</div>
-										</div>
-									</div>
-
-									<div style="height: 40%;" class="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-										<div class="carousel-inner" role="listbox">
-											<?php
-												$count = 0;
-
-												foreach($captions as $val) {
-													if ($count == 0) {
-														$class = "item active";
-													}
-
-													else {
-														$class = "item";
-													}
-
-													echo "<div class='$class' style='height: 100%;'>";
-														echo "<h3 style='color: white; font-size: 3.5vh!important; margin-top: 5px!important; margin-bottom: 5px!important; text-align: center;'>$val</h3>";
-													echo "</div>";
-
-													$count++;
-												}
-											?>
-										</div>
-									</div>
-								</div>
-
-								<div style='width: 15%; float: left; height: 100%;'>
-									<img src="images/arrow3.png" class="arrowRight carousel-control" href=".carousel" data-slide="next"  style='margin-left: auto; margin-right: auto; display: block;'/>
-								</div>
-							</div>
-						</div>
-
+									while($statement->fetch()){
+										echo "<img alt='$caption' src='images/gallery/$image' data-image='images/gallery/$image' />";
+									}
+							?>
 					</div>
 			</div>
 		</div>
 
 		<?php include "footer.php"; ?>
+
+		<script>
+			$(document).ready(function(){
+					$("#gallery").unitegallery({
+						gallery_theme: "grid",
+						gallery_height: 650,
+						theme_panel_position: "bottom",
+						theme_hide_panel_under_width: null,
+						slider_enable_progress_indicator:false,
+						slider_enable_play_button:false,
+						slider_enable_fullscreen_button:false,
+						slider_enable_zoom_panel:false,
+						gridpanel_enable_handle:false,
+						slider_arrows_skin:"alexis",
+						gridpanel_padding_border_bottom: 10,
+					});
+			});
+		</script>
+
 	</body>
 </html>
