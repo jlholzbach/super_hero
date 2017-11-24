@@ -28,6 +28,7 @@
 
 .sidebar a, .sidebar button {
   color: white;
+  padding: 4px!important;
 }
 
 .bar-item {
@@ -80,6 +81,16 @@
   bottom: 0;
   background-color: rgba(0,0,0,0.5);
   z-index: 2;
+}
+
+@media (max-width: 420px) {
+  .sidebar a, .sidebar button {
+    padding-top: 8px!important;
+    padding-bottom: 8px!important;
+    padding-left: 2px!important;
+    padding-right: 2px!important;
+    text-align: center;
+  }
 }
 
 @media (min-width: 992px) {
