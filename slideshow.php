@@ -54,6 +54,11 @@
 				background-image: url(images/slideshow.jpg);
 				background-size: cover;
 			}
+
+			h2 {
+				text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+			}
+
 		</style>
 
 		<div id="content">
@@ -64,7 +69,7 @@
 
 					<div id="gallery" style="margin-top: 45px; margin-bottom: 150px; display:none; margin-left: auto; margin-right: auto;">
 							<?php
-									$query = "SELECT `image`, `caption` FROM `gallery_image` WHERE `gallery_id` = ?";
+									$query = "SELECT `image`, `caption` FROM `gallery_image` WHERE `gallery_id` = ? ORDER BY caption";
 									$statement = $db->prepare($query);
 									$statement->bind_param("i", $id);
 									$statement->execute();
@@ -88,18 +93,20 @@
 						gallery_min_height: 500,
 						thumb_width:120,
 						thumb_height:70,
-						theme_panel_position: "bottom",
-						theme_hide_panel_under_width: null,
+						theme_panel_position: "right",
 						slider_enable_text_panel: true,
 						slider_enable_progress_indicator:false,
 						slider_enable_play_button:false,
 						slider_enable_fullscreen_button:false,
 						slider_enable_zoom_panel:false,
-						gridpanel_enable_handle:false,
 						slider_arrows_skin:"alexis",
 						gridpanel_padding_border_bottom: 10,
+						grid_num_cols: 1,
+						gridpanel_vertical_scroll: false
 					});
 			});
+			//theme_hide_panel_under_width: null,
+			//gridpanel_enable_handle:false,
 		</script>
 
 	</body>

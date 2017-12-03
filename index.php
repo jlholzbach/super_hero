@@ -71,19 +71,19 @@
 										</div>
 
 										<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-											<a href="slideshow.php">
+											<a href="gallery.php">
 												<div class="option">
 													<div class="imageContainer">
 														<img src="images/slideshow.png" alt="Slideshow">
 													</div>
 													<div class="text">
-															<h3 style='margin-top: 0px!important; text-align: center;'>Slideshow of Heroes</h3>
+															<h3 style='margin-top: 0px!important; text-align: center;'>Image Galleries</h3>
 															<p>
-																	Check back often for new heroes.
+																	View galleries containing Artifacts, Characters and Locations.
 																	<br />
 																	<b>Coming soon:</b>
 																	<br />
-																	<span>The ability to chose slideshows</span>
+																	<span>More Galleries</span>
 															</p>
 													</div>
 												</div>
