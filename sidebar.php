@@ -7,5 +7,5 @@
   <a href="gallery.php" class="bar-item blue hover-green">Galleries</a>
   <a href="trivia.php" class="bar-item blue hover-green">Hall of Trivia</a>
   <a href="quotes.php" class="bar-item blue hover-green">Heroic Quotes</a>
-  <a href="placeholder.php" class="bar-item blue hover-green">Registration</a>
+  <a href="placeholder.php" style='display: none;' class="bar-item blue hover-green">Registration</a>
 </div>

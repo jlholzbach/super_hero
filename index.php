@@ -23,6 +23,9 @@
   <body>
 		<?php include "sidebar.php"; ?>
 
+		<style>
+
+		</style>
 
 		<div id="content">
 				<div id="main">
@@ -36,11 +39,11 @@
 
 								<hr>
 
-								<a href="placeholder.php" style='text-decoration: none; margin-right: 15px;'>
+								<a href="placeholder.php" style='display: none; text-decoration: none; margin-right: 15px;'>
 									<button class='btn btn-lg'>Register</button>
 								</a>
 
-								<a href="placeholder.php" style='text-decoration: none;'>
+								<a href="placeholder.php" style='display: none; text-decoration: none;'>
 									<button class='btn btn-lg'>Login</button>
 								</a>
 
