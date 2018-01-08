@@ -63,6 +63,12 @@
 				background-color: chocolate!important;
 			}
 
+			@media only screen and (max-width: 991px) {
+				.navbar-brand {
+					background-color: black!important;
+				}
+			}
+
 			.navbar-nav li a:hover, .navbar-brand:hover {
 				color:#fff!important;
 				background-color:#4CAF50!important
