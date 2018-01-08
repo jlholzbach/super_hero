@@ -13,7 +13,7 @@
 				<span class="icon-bar"></span>
 			</button>
 
-			<a class="navbar-brand" style='color: white; text-decoration: none;' href="index.php">
+			<a class="<?php if ($curpage == "index.php") { echo 'active'; } ?> navbar-brand" style='color: white; text-decoration: none;' href="index.php">
 				Super Hero Fan Club
 			</a>
 		</div>
@@ -21,16 +21,16 @@
 		<div class="collapse navbar-collapse" id="navBar">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="entertainment.php">Archive of Entertainment</a>
+					<a href="entertainment.php" class="<?php if ($curpage == "entertainment.php") { echo 'active'; } ?>">Archive of Entertainment</a>
 				</li>
 				<li>
-					<a href="gallery.php">Galleries</a>
+					<a href="gallery.php" class="<?php if ($curpage == "gallery.php") { echo 'active'; } ?>">Galleries</a>
 				</li>
 				<li>
-					<a href="trivia.php">Hall of Trivia</a>
+					<a href="trivia.php" class="<?php if ($curpage == "trivia.php") { echo 'active'; } ?>">Hall of Trivia</a>
 				</li>
 				<li>
-					<a href="quotes.php">Heroic Quotes</a>
+					<a href="quotes.php" class="<?php if ($curpage == "quotes.php") { echo 'active'; } ?>">Heroic Quotes</a>
 				</li>
 				<li style='display: none;'>
 					<a href="placeholder.php">Registration</a>
@@ -41,16 +41,16 @@
 		<div class="collapsed navbar-collapse" style='display: none; background: black;' id="xNav"><!-- For iPhone X-->
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="entertainment.php">Archive of Entertainment</a>
+					<a href="entertainment.php" class="<?php if ($curpage == "entertainment.php") { echo 'active'; } ?>">Archive of Entertainment</a>
 				</li>
 				<li>
-					<a href="gallery.php">Galleries</a>
+					<a href="gallery.php" class="<?php if ($curpage == "gallery.php") { echo 'active'; } ?>">Galleries</a>
 				</li>
 				<li>
-					<a href="trivia.php">Hall of Trivia</a>
+					<a href="trivia.php" class="<?php if ($curpage == "trivia.php") { echo 'active'; } ?>">Hall of Trivia</a>
 				</li>
 				<li>
-					<a href="quotes.php">Heroic Quotes</a>
+					<a href="quotes.php" class="<?php if ($curpage == "quotes.php") { echo 'active'; } ?>">Heroic Quotes</a>
 				</li>
 				<li style='display: none;'>
 					<a href="placeholder.php">Registration</a>
@@ -59,7 +59,11 @@
 		</div>
 
 		<style>
-			.navbar-nav li a:hover {
+			.active {
+				background-color: chocolate!important;
+			}
+
+			.navbar-nav li a:hover, .navbar-brand:hover {
 				color:#fff!important;
 				background-color:#4CAF50!important
 			}

@@ -23,10 +23,6 @@
   <body>
 		<?php include "sidebar.php"; ?>
 
-		<style>
-
-		</style>
-
 		<div id="content">
 				<div id="main">
 					<?php include "navigation.php"; ?>
@@ -94,7 +90,23 @@
 										</div>
 
 										<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-
+											<a href="quotes.php">
+												<div class="option">
+													<div class="imageContainer">
+														<img src="images/quotes.png" alt="Quote">
+													</div>
+													<div class="text">
+															<h3 style='margin-top: 0px!important; text-align: center;'>Heroic Quotes</h3>
+															<p>
+																	View quotes from various characters.
+																	<br />
+																	<b>Coming soon:</b>
+																	<br />
+																	<span>Ability to share quotes</span>
+															</p>
+													</div>
+												</div>
+											</a>
 										</div>
 									</div>
 								</div>
