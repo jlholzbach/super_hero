@@ -338,10 +338,11 @@
 
 			});
 
-			$("#search").keyup(search);
+			//$("#search").keyup(search);
+
+			$("#search").keypress(search);
 
 			function search(callback) {
-				console.log("Search: " + searchCount);
 				searchCount++;
 
 				all = "";
@@ -419,7 +420,7 @@
 							}
 
 							movies += "<div id='"+moviesList[i]['id']+"' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
-								movies += "<span class='title'>"+ moviesList[i]['name'] +"</span>";
+								movies += "<span class='title btn-link'>"+ moviesList[i]['name'] +"</span>";
 
 								movies += "<div style='font-size: 14px; margin-left: 30px;'>";
 									movies += "<i class='fa fa-film' aria-hidden='true'></i>";
@@ -450,7 +451,7 @@
 							}
 
 							shows += "<div id='"+showsList[i]['id']+"' class='entertainment col col-lg-4 col-md-4 col-sm-4 col-xs-12'>";
-								shows += "<span class='title'>"+ showsList[i]['name'] +"</span>";
+								shows += "<span class='title btn-link'>"+ showsList[i]['name'] +"</span>";
 
 								shows += "<div style='font-size: 14px; margin-left: 30px;'>";
 									shows += "<i class='fa fa-television' aria-hidden='true'></i>";
@@ -481,9 +482,9 @@
 							shows += "</div>";
 						}
 
+						$("#shows div").html(shows);
 						$("#all div").html(all);
 						$("#movies div").html(movies);
-						$("#shows div").html(shows);
 
 					},
 					complete: function () {
