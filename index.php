@@ -79,10 +79,10 @@
 															<h3 style='margin-top: 0px!important; text-align: center;'>Image Galleries</h3>
 															<p>
 																	View galleries containing Artifacts, Characters and Locations.
-																	<br />
+																	<!--<br />
 																	<b>Coming soon:</b>
 																	<br />
-																	<span>More Galleries</span>
+																	<span>More Galleries</span>-->
 															</p>
 													</div>
 												</div>
@@ -96,13 +96,14 @@
 														<img src="images/quotes.png" alt="Quote">
 													</div>
 													<div class="text">
-															<h3 style='margin-top: 0px!important; text-align: center;'>Heroic Quotes</h3>
+															<h3 style='margin-top: 0px!important; text-align: center;'>Notable Quotes</h3>
 															<p>
-																	View quotes from various characters.
-																	<br />
+																	View interesting quotes from various characters. See one you like share it
+																	to Facebook or Twitter.
+																	<!--<br />
 																	<b>Coming soon:</b>
 																	<br />
-																	<span>Ability to share quotes</span>
+																	<span>Ability to share quotes</span>-->
 															</p>
 													</div>
 												</div>

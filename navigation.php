@@ -30,7 +30,7 @@
 					<a href="trivia.php" class="<?php if ($curpage == "trivia.php") { echo 'active'; } ?>">Hall of Trivia</a>
 				</li>
 				<li>
-					<a href="quotes.php" class="<?php if ($curpage == "quotes.php") { echo 'active'; } ?>">Heroic Quotes</a>
+					<a href="quotes.php" class="<?php if ($curpage == "quotes.php") { echo 'active'; } ?>">Notable Quotes</a>
 				</li>
 				<li style='display: none;'>
 					<a href="placeholder.php">Registration</a>
@@ -50,7 +50,7 @@
 					<a href="trivia.php" class="<?php if ($curpage == "trivia.php") { echo 'active'; } ?>">Hall of Trivia</a>
 				</li>
 				<li>
-					<a href="quotes.php" class="<?php if ($curpage == "quotes.php") { echo 'active'; } ?>">Heroic Quotes</a>
+					<a href="quotes.php" class="<?php if ($curpage == "quotes.php") { echo 'active'; } ?>">Notable Quotes</a>
 				</li>
 				<li style='display: none;'>
 					<a href="placeholder.php">Registration</a>
@@ -82,42 +82,6 @@
 
 	</div>
 </nav>
-
-<!--<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		  </button>
-		  <a class="navbar-brand" href="index.php">
-			Super Hero Fan Club
-		  </a>
-		</div>
-
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <ul class="nav navbar-nav">
-			<li>
-				<a href="entertainment.php">Archive of Entertainment</a>
-			</li>
-			<li>
-				<a href="trivia.php">Hall of Trivia</a>
-			</li>
-			<li>
-				<a href="quotes.php">Heroic Quotes</a>
-			</li>
-			<li>
-				<a href="placeholder.php">Registration</a>
-			</li>
-			<li>
-				<a href="slideshow.php">Slideshow of Heroes</a>
-			</li>
-		  </ul>
-		</div>
-	</div>
-</nav>-->
 
 <script type="text/javascript">
 	$(document).ready(function() {
