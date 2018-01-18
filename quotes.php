@@ -53,11 +53,13 @@
 
 		<meta property="og:title" content="Super Hero Fan Club" />
 		<meta property="og:site_name" content="Super Hero Fan Club"/>
-		<meta property="og:url" content="http://www.joshuaholzbach.com/super_hero/quotes.php?quote=<?php echo $quoteID; ?>" />
-		<meta property="og:description" content="<?php echo $quote . ' - ' . $author_name; ?>" />
-		<meta property="og:image" content="http://www.joshuaholzbach.com/super_hero/images/quotes_share.png" />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
+		<?php if (isset($_GET['quoteID'])) {?>
+						<meta property="og:url" content="http://www.joshuaholzbach.com/super_hero/quotes.php?quote=<?php echo $quoteID; ?>" />
+						<meta property="og:description" content="<?php echo $quote . ' - ' . $author_name; ?>" />
+						<meta property="og:image" content="http://www.joshuaholzbach.com/super_hero/images/quotes_share.png" />
+						<meta property="og:image:width" content="1200" />
+						<meta property="og:image:height" content="630" />
+		<?php } ?>
 
 		<title>Super Hero Fan Club</title>
 
@@ -76,8 +78,6 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="https://use.fontawesome.com/dd79007e72.js"></script>
 
-		<!--Sizes container inside content div based on window size-->
-		<!--<script src="js/resize.js"></script>-->
 		<script src="js/jaliswall.js"></script>
 
 	</head>
@@ -142,8 +142,9 @@
 											echo "<a href='quotes.php?author={$authorID}'><p style='text-align: left; font-size: 16px;'>{$author_name}</p></a>";
 											echo "<hr style='border-top: 1px solid black; margin: 0px!important;' />";
 											echo "<div class='social'>";
-												echo "<span onClick='share({$id})' class='fa fa-facebook'></span>";
-												echo "<span onClick='tweet({$id})' class='fa fa-twitter'></span>";
+												echo "<span onClick='share({$quoteID})' class='fa fa-facebook'></span>";
+												echo "<span quote='{$quote}' onClick='tweet({$quoteID}, this)' class='fa fa-twitter'></span>";
+												//echo "<span onClick='tweet({$quoteID})' class='fa fa-twitter'></span>";
 											echo "</div>";
 										echo "</div>";
 
@@ -174,7 +175,7 @@
 
 												echo "<div class='social'>";
 													echo "<span onClick='share({$id})' class='fa fa-facebook'></span>";
-													echo "<span onClick='tweet({$id})' class='fa fa-twitter'></span>";
+													echo "<span quote='{$quote}' onClick='tweet({$id}, this)' class='fa fa-twitter'></span>";
 												echo "</div>";
 
 											echo "</div>";
@@ -197,7 +198,6 @@
 
 				function share(quoteID) {
 					let url = "http://www.joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
-					//let url = "http://www.joshuaholzbach.com/super_hero/quotes.php";
 
 				 FB.ui({
 					  method: 'share',
@@ -205,43 +205,46 @@
 					  href: url
 					}, function(response){});
 
-					/*FB.login(function(){
-						FB.api('/me/feed', 'post', {message: 'Hello, world!'});
-					}, {scope: 'publish_actions'});*/
 				}
 
-				function tweet(quoteID) {
-					var url = "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
+				function tweet(quoteID, e) {
+					if (quoteID != "") {
+						var url = "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
+						var quote = $(e).attr("quote");
+						//window.open("http://joshuaholzbach.com/super_hero/quotes.php?quote=1", "_blank");
 
-					$.ajax({
-						url: 'ajax/getQuote.php',
-						type: 'POST',
-						dataType: 'json',
-						data: {id: quoteID},
-						success: function(quote) {
-							console.log(quote);
-
-							if ((quote.length + quote.length) > 280) {
-								text = quote.substring(0, 280 - url.length+3) + "...";
-							}
-
-						  url = "https://twitter.com/intent/tweet/?text=" + quote
-							+ "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
-							windowPopup(url, 500, 300);
+						if ((quote.length + quote.length) > 280) {
+							text = quote.substring(0, 280 - url.length+3) + "...";
 						}
-					});
 
-					/*text = "The benefit of being a Time Master is that the length and breadth of history gives one perspective."
-					+ "I've seen darker days. I've seen men of steel die and dark knights fall, and even then I accomplished my"
-					+ " mission no matter what.";*/
+						url = "https://twitter.com/intent/tweet/?text=" + quote
+						+ "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
+						windowPopup(url, 500, 300);
 
-					/*if ((text.length + url.length) > 280) {
-						text = text.substring(0, 280 - url.length+3) + "...";
+						/*$.ajax({
+							url: 'ajax/getQuote.php',
+							type: 'POST',
+							dataType: 'json',
+							data: {id: quoteID},
+							success: function(quote) {
+								console.log(quote);
+
+								if ((quote.length + quote.length) > 280) {
+									text = quote.substring(0, 280 - url.length+3) + "...";
+								}
+
+							  url = "https://twitter.com/intent/tweet/?text=" + quote
+								+ "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
+								windowPopup(url, 500, 300);
+							}
+						});*/
+
 					}
 
-				  url = "https://twitter.com/intent/tweet/?text=" + text
-					+ "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
-					windowPopup(url, 500, 300);*/
+					else {
+						alert("No ID found");
+					}
+
 				}
 
 				function windowPopup(url, width, height) {
@@ -250,15 +253,15 @@
 				  var left = (screen.width / 2) - (width / 2),
 				      top = (screen.height / 2) - (height / 2);
 
-				  window.open(
+					//window.open("http://joshuaholzbach.com", "_blank");
+
+					window.open(
 						url,
-						"",
+						"_blank",
 				    "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width="
 						+ width + ",height=" + height + ",top=" + top + ",left=" + left
 				  );
 				}
-
-
 
 			  window.fbAsyncInit = function() {
 			    FB.init({
