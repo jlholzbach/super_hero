@@ -1,6 +1,8 @@
 <?php
 	include "dbConnect.php";
 
+	$title = "Notable Quotes";
+
 	if (isset($_GET['author'])) {
 		$authorID = $_GET['author'];
 
@@ -12,7 +14,7 @@
 		$statement->fetch();
 		$statement->free_result();
 
-		$title = $author_name . " Quotes";
+		//$title = $author_name . " Quotes";
 	}
 
 	else if (isset($_GET['quote'])) {
@@ -26,6 +28,15 @@
 		$statement->fetch();
 		$statement->free_result();
 
+		$query = "SELECT * FROM `quotes` WHERE `author` = ?";
+		$statement = $db->prepare($query);
+		$statement->bind_param("i", $authorID);
+		$statement->execute();
+		$statement->store_result();
+		$count = $statement->num_rows;
+		$statement->fetch();
+		$statement->free_result();
+
 		$query = "SELECT `author` FROM `quote_authors` WHERE `id` = ?";
 		$statement = $db->prepare($query);
 		$statement->bind_param("i", $authorID);
@@ -34,12 +45,11 @@
 		$statement->fetch();
 		$statement->free_result();
 
-		$title = $author_name . " Quotes";
-	}
+		/*if ($count > 1 ) {
+			$title = $author_name . " Quotes";
+		}
 
-
-	else {
-		$title = "Notable Quotes";
+		$title = "";*/
 	}
 
 ?>
@@ -51,9 +61,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<meta property="og:title" content="Super Hero Fan Club" />
-		<meta property="og:site_name" content="Super Hero Fan Club"/>
 		<?php if (isset($_GET['quoteID'])) {?>
+						<meta property="og:title" content="Super Hero Fan Club" />
+						<meta property="og:site_name" content="Super Hero Fan Club"/>
 						<meta property="og:url" content="http://www.joshuaholzbach.com/super_hero/quotes.php?quote=<?php echo $quoteID; ?>" />
 						<meta property="og:description" content="<?php echo $quote . ' - ' . $author_name; ?>" />
 						<meta property="og:image" content="http://www.joshuaholzbach.com/super_hero/images/quotes_share.png" />
@@ -78,7 +88,11 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="https://use.fontawesome.com/dd79007e72.js"></script>
 
+		<!-- Used for Pinterest type grid-->
 		<script src="js/jaliswall.js"></script>
+
+		<!-- Used for resizing text to fit container -->
+		<script src="js/fittext.js"></script>
 
 	</head>
 
@@ -89,37 +103,6 @@
 			#content {
 				margin: 0px!important;
 			}
-
-		  .fa-facebook {
-				background-color: #375a9c;
-			}
-
-			.fa-facebook:hover {
-				background-color: #738ec0;
-			}
-
-			.fa-twitter {
-				background-color: #00acf0;
-			}
-
-			.fa-twitter:hover {
-			    background-color: #46c0fb;
-			}
-
-			.social span {
-					margin-top: 10px!important;
-					cursor: pointer;
-			    border-radius: 30px;
-			    color: #fff;
-			    display: inline-block;
-			    height: 30px;
-			    line-height: 30px;
-			    margin: auto 3px;
-			    width: 30px;
-			    font-size: 15px;
-			    text-align: center;
-			}
-
 		</style>
 
 		<div id="content">
@@ -128,7 +111,22 @@
 
 					<h2 id="pageTitle" style='font-size: 4rem!important; text-align: center; color: white;'><?php echo $title; ?></h1>
 
-					<div class="grid" style='visibility: hidden;'>
+					<?php if (isset($_GET['quote'])) {?>
+						<div class="grid" style='visibility: hidden;'>
+							<div class="row">
+								<div class="col col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-1 col-lg-6 col-md-6 col-sm-8 col-xs-10" style="height: 325px;">
+									<img src="https://thecliparts.com/wp-content/uploads/2016/12/gold-frame-clipart.gif" style="width: 100%; height: 300px;">
+									<div style="display: table; background: white; height: 213px; position: relative; top: -255px; left: 12.5%; width: 77%;">
+										<p class="resize">
+											<?php
+												echo $quote . "<br /> - " . $author_name;
+											?>
+										</p>
+									</div>
+								</div>
+							</div>
+						<?php } ?>
+
 						<div class="wall">
 							<?php
 									if (isset($_GET['author'])) {
@@ -137,16 +135,15 @@
 
 									else if (isset($_GET['quote'])) {
 
-										echo "<div class='wall-item'>";
+										/*echo "<div class='wall-item'>";
 											echo "<p style='text-align: left; font-size: 16px; font-weight: bold;'>{$quote}</p>";
 											echo "<a href='quotes.php?author={$authorID}'><p style='text-align: left; font-size: 16px;'>{$author_name}</p></a>";
-											echo "<hr style='border-top: 1px solid black; margin: 0px!important;' />";
+											echo "<hr />";
 											echo "<div class='social'>";
 												echo "<span onClick='share({$quoteID})' class='fa fa-facebook'></span>";
 												echo "<span quote='{$quote}' onClick='tweet({$quoteID}, this)' class='fa fa-twitter'></span>";
-												//echo "<span onClick='tweet({$quoteID})' class='fa fa-twitter'></span>";
 											echo "</div>";
-										echo "</div>";
+										echo "</div>";*/
 
 										$query = "SELECT quotes.id, quotes.quote, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id WHERE quote_authors.id={$authorID} AND quotes.id!={$quoteID}";
 									}
@@ -158,7 +155,7 @@
 									$result = $db->query($query);
 
 									while($row = $result->fetch_assoc()){
-											if (!isset($_GET['author'])) {
+											if ((!isset($_GET['author'])) && (!isset($_GET['quote']))) {
 												$authorID = $row['authorID'];
 											}
 
@@ -170,8 +167,7 @@
 											echo "<div class='wall-item'>";
 												echo "<p style='text-align: left; font-size: 16px; font-weight: bold;'>{$quote}</p>";
 												echo "<a href='quotes.php?author={$authorID}'><p style='text-align: left; font-size: 16px;'>{$author}</p></a>";
-												echo "<hr style='border-top: 1px solid black; margin: 0px!important;' />";
-												//echo "<img onClick='share({$id})' style='display: none; width: 40px!important; margin: 5px 0 0 !important;' src='images/facebook.png' />";
+												echo "<hr />";
 
 												echo "<div class='social'>";
 													echo "<span onClick='share({$id})' class='fa fa-facebook'></span>";
@@ -194,6 +190,7 @@
 						$(".grid").css('visibility','visible').hide().fadeIn(1000);
 					},1000);
 
+					$(".resize").fitText(1.8, { minFontSize: '16px', maxFontSize: '20px' });
 				});
 
 				function share(quoteID) {
@@ -221,28 +218,10 @@
 						+ "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
 						windowPopup(url, 500, 300);
 
-						/*$.ajax({
-							url: 'ajax/getQuote.php',
-							type: 'POST',
-							dataType: 'json',
-							data: {id: quoteID},
-							success: function(quote) {
-								console.log(quote);
-
-								if ((quote.length + quote.length) > 280) {
-									text = quote.substring(0, 280 - url.length+3) + "...";
-								}
-
-							  url = "https://twitter.com/intent/tweet/?text=" + quote
-								+ "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
-								windowPopup(url, 500, 300);
-							}
-						});*/
-
 					}
 
 					else {
-						alert("No ID found");
+						console.log("No ID found");
 					}
 
 				}
@@ -252,8 +231,6 @@
 				  // it’s centered on the screen.
 				  var left = (screen.width / 2) - (width / 2),
 				      top = (screen.height / 2) - (height / 2);
-
-					//window.open("http://joshuaholzbach.com", "_blank");
 
 					window.open(
 						url,
