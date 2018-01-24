@@ -127,7 +127,7 @@
 							</div>
 						<?php } ?>
 
-						<div class="wall">
+						<div class="wall" style='visibility: hidden;'>
 							<?php
 									if (isset($_GET['author'])) {
 										$query = "SELECT quotes.id, quotes.quote, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id WHERE quote_authors.id={$authorID}";
@@ -188,6 +188,7 @@
 
 					setTimeout(function () {
 						$(".grid").css('visibility','visible').hide().fadeIn(1000);
+						$(".wall").css('visibility','visible').hide().fadeIn(1000);
 					},1000);
 
 					$(".resize").fitText(1.8, { minFontSize: '16px', maxFontSize: '20px' });
