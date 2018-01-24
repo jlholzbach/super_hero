@@ -14,7 +14,7 @@
 		$statement->fetch();
 		$statement->free_result();
 
-		//$title = $author_name . " Quotes";
+		$title = $author_name . " Quotes";
 	}
 
 	else if (isset($_GET['quote'])) {
@@ -83,6 +83,7 @@
 
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
 
 		<!-- Latest compiled JavaScript -->
 		<script src="js/bootstrap.min.js"></script>
@@ -103,6 +104,43 @@
 			#content {
 				margin: 0px!important;
 			}
+
+			.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+	  	.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+	  	.autocomplete-selected { background: #F0F0F0; }
+	  	.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+	  	.autocomplete-group { padding: 2px 5px; }
+	  	.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
+			.inner-addon {
+			  width: 100%;
+				max-width: 350px;
+			  position: relative;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+
+			.inner-addon .glyphicon {
+			  position: absolute;
+			  padding: 10px;
+			  pointer-events: none;
+			}
+
+			/* align icon */
+			.right-addon .glyphicon { right: 0px;}
+
+			/* add padding  */
+			.right-addon input { padding-right: 30px; }
+
+			#search {
+			  font-size: 16px;
+			  margin-bottom: 15px;
+			  height: 35px;
+			  width: 100%;
+			  border: 1px solid black;
+			  border-radius: 5px;
+			}
+
 		</style>
 
 		<div id="content">
@@ -110,6 +148,15 @@
 					<?php include "navigation.php"; ?>
 
 					<h2 id="pageTitle" style='font-size: 4rem!important; text-align: center; color: white;'><?php echo $title; ?></h1>
+
+					<div class="row adjust" style='position: initial!important;'>
+							<div class="first col col-lg-12 col-md-12 col-sm-12 col-xs-12 side">
+								<div class="inner-addon right-addon" style='margin-left: auto; margin-right: auto;'>
+									<i class="glyphicon glyphicon-search"></i>
+									<input type="text" name="search" id="search"  placeholder="Type to Search" value="">
+								</div>
+							</div>
+					</div>
 
 					<?php if (isset($_GET['quote'])) {?>
 						<div class="grid" style='visibility: hidden;'>
@@ -126,6 +173,21 @@
 								</div>
 							</div>
 						<?php } ?>
+
+						<!--<div class="row" style='position: initial!important; margin-left: 0px!important; margin-right: 0px!important;'>
+							<div class="col col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
+
+							<div class="col col-lg-8 col-md-10 col-sm-10 col-xs-12">
+									<div class="row adjust" style='position: initial!important;'>
+											<div class="first col col-lg-6 col-md-6 col-sm-6 col-xs-12 side">
+												<div class="inner-addon right-addon">
+													<i class="glyphicon glyphicon-search"></i>
+													<input type="text" name="search" id="search"  placeholder="Type to Search" value="">
+												</div>
+											</div>
+									</div>
+							</div>
+						</div>-->
 
 						<div class="wall" style='visibility: hidden;'>
 							<?php
@@ -184,6 +246,8 @@
 
 		<script>
 				$(document).ready(function() {
+					var arrayReturn = [];
+
 					$('.wall').jaliswall({item:'.wall-item'});
 
 					setTimeout(function () {
@@ -192,6 +256,32 @@
 					},1000);
 
 					$(".resize").fitText(1.8, { minFontSize: '16px', maxFontSize: '20px' });
+
+					$.ajax({
+			  		url: "ajax/getAuthors.php",
+			  		async: true,
+			  		dataType: 'json',
+			  		success: function (data) {
+							console.log("Testing");
+			        for (var i = 0, len = data.length; i < len; i++) {
+			  				var id = (data[i].id).toString();
+			  				arrayReturn.push({'value' : data[i].author, 'data' : id});
+			  			}
+
+			  			//send parse data to autocomplete function
+			  			loadSuggestions(arrayReturn);
+			  		}
+			  	});
+
+					function loadSuggestions(options) {
+			  		$('#search').autocomplete({
+			  			lookup: options,
+			  			onSelect: function (suggestion) {
+			          window.location.href = "quotes.php?author=" + suggestion.data;
+			  			}
+			  		});
+			  	}
+
 				});
 
 				function share(quoteID) {
