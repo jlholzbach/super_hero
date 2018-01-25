@@ -90,7 +90,8 @@
 		<script src="https://use.fontawesome.com/dd79007e72.js"></script>
 
 		<!-- Used for Pinterest type grid-->
-		<script src="js/jaliswall.js"></script>
+		<!--<script src="js/jaliswall.js"></script>-->
+		<script src="js/jquery.wallyti.js"></script>
 
 		<!-- Used for resizing text to fit container -->
 		<script src="js/fittext.js"></script>
@@ -189,66 +190,77 @@
 							</div>
 						</div>-->
 
-						<div class="wall" style='visibility: hidden;'>
-							<?php
-									if (isset($_GET['author'])) {
-										$query = "SELECT quotes.id, quotes.quote, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id WHERE quote_authors.id={$authorID}";
-									}
+						<div class="wrapper" style='width: 95%; margin: auto; position: relative;'>
+							<div class="wall" style='visibility: hidden;' wallyti-block-margin="20">
+								<?php
+										if (isset($_GET['author'])) {
+											$query = "SELECT quotes.id, quotes.quote, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id WHERE quote_authors.id={$authorID}";
+										}
 
-									else if (isset($_GET['quote'])) {
+										else if (isset($_GET['quote'])) {
 
-										/*echo "<div class='wall-item'>";
-											echo "<p style='text-align: left; font-size: 16px; font-weight: bold;'>{$quote}</p>";
-											echo "<a href='quotes.php?author={$authorID}'><p style='text-align: left; font-size: 16px;'>{$author_name}</p></a>";
-											echo "<hr />";
-											echo "<div class='social'>";
-												echo "<span onClick='share({$quoteID})' class='fa fa-facebook'></span>";
-												echo "<span quote='{$quote}' onClick='tweet({$quoteID}, this)' class='fa fa-twitter'></span>";
-											echo "</div>";
-										echo "</div>";*/
-
-										$query = "SELECT quotes.id, quotes.quote, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id WHERE quote_authors.id={$authorID} AND quotes.id!={$quoteID}";
-									}
-
-									else {
-										$query = "SELECT quotes.id, quotes.quote, quote_authors.id as authorID, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id";
-									}
-
-									$result = $db->query($query);
-
-									while($row = $result->fetch_assoc()){
-											if ((!isset($_GET['author'])) && (!isset($_GET['quote']))) {
-												$authorID = $row['authorID'];
-											}
-
-											$id = $row['id'];
-
-											$quote = stripslashes($row['quote']);
-											$author = stripslashes($row['author']);
-
-											echo "<div class='wall-item'>";
+											/*echo "<div class='wall-item'>";
 												echo "<p style='text-align: left; font-size: 16px; font-weight: bold;'>{$quote}</p>";
-												echo "<a href='quotes.php?author={$authorID}'><p style='text-align: left; font-size: 16px;'>{$author}</p></a>";
+												echo "<a href='quotes.php?author={$authorID}'><p style='text-align: left; font-size: 16px;'>{$author_name}</p></a>";
 												echo "<hr />";
-
 												echo "<div class='social'>";
-													echo "<span onClick='share({$id})' class='fa fa-facebook'></span>";
-													echo "<span quote='{$quote}' onClick='tweet({$id}, this)' class='fa fa-twitter'></span>";
+													echo "<span onClick='share({$quoteID})' class='fa fa-facebook'></span>";
+													echo "<span quote='{$quote}' onClick='tweet({$quoteID}, this)' class='fa fa-twitter'></span>";
 												echo "</div>";
+											echo "</div>";*/
 
-											echo "</div>";
-									}
-							?>
+											$query = "SELECT quotes.id, quotes.quote, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id WHERE quote_authors.id={$authorID} AND quotes.id!={$quoteID}";
+										}
+
+										else {
+											$query = "SELECT quotes.id, quotes.quote, quote_authors.id as authorID, quote_authors.author FROM `quotes` INNER JOIN `quote_authors` ON quotes.author=quote_authors.id";
+										}
+
+										$result = $db->query($query);
+
+										while($row = $result->fetch_assoc()){
+												if ((!isset($_GET['author'])) && (!isset($_GET['quote']))) {
+													$authorID = $row['authorID'];
+												}
+
+												$id = $row['id'];
+
+												$quote = stripslashes($row['quote']);
+												$author = stripslashes($row['author']);
+
+												echo "<div class='wall-item'>";
+													echo "<p style='text-align: left; font-size: 16px; font-weight: bold;'>{$quote}</p>";
+													echo "<a href='quotes.php?author={$authorID}'><p style='text-align: left; font-size: 16px;'>{$author}</p></a>";
+													echo "<hr />";
+
+													echo "<div class='social'>";
+														echo "<span onClick='share({$id})' class='fa fa-facebook'></span>";
+														echo "<span quote='{$quote}' onClick='tweet({$id}, this)' class='fa fa-twitter'></span>";
+													echo "</div>";
+
+												echo "</div>";
+										}
+								?>
+							</div>
 						</div>
+
 					</div>
 			</div>
 		</div>
 
 		<script>
+				/*$(window).on("orientationchange", function(e) {
+					$('.wall').jaliswall({item:'.wall-item'});
+				});*/
+
+				$(function(){
+					$('.wall').wallyti(function(){});
+				});
+
 				$(document).ready(function() {
 					var arrayReturn = [];
 
-					$('.wall').jaliswall({item:'.wall-item'});
+					//$('.wall').jaliswall({item:'.wall-item'});
 
 					setTimeout(function () {
 						$(".grid").css('visibility','visible').hide().fadeIn(1000);
@@ -262,13 +274,11 @@
 			  		async: true,
 			  		dataType: 'json',
 			  		success: function (data) {
-							console.log("Testing");
 			        for (var i = 0, len = data.length; i < len; i++) {
 			  				var id = (data[i].id).toString();
 			  				arrayReturn.push({'value' : data[i].author, 'data' : id});
 			  			}
 
-			  			//send parse data to autocomplete function
 			  			loadSuggestions(arrayReturn);
 			  		}
 			  	});
@@ -299,7 +309,6 @@
 					if (quoteID != "") {
 						var url = "&url=http://joshuaholzbach.com/super_hero/quotes.php?quote=" + quoteID;
 						var quote = $(e).attr("quote");
-						//window.open("http://joshuaholzbach.com/super_hero/quotes.php?quote=1", "_blank");
 
 						if ((quote.length + quote.length) > 280) {
 							text = quote.substring(0, 280 - url.length+3) + "...";

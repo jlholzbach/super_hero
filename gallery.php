@@ -22,7 +22,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 		<script src="js/bootstrap.min.js"></script>
-    <script src="js/jaliswall.js"></script>
+    <!--<script src="js/jaliswall.js"></script>-->
+		<script src="js/jquery.wallyti.js"></script>
 	</head>
 
 	<body>
@@ -34,30 +35,36 @@
 					<h2 id="pageTitle" style='font-size: 4rem!important; text-align: center; color: white;'>Galleries</h2>
 
           <div class="grid" style='visibility: hidden;'>
-            <div class="wall">
-							<?php
-									$query = "SELECT * from gallery ORDER BY title";
-									$result = $db->query($query);
+						<div class="wrapper" style='width: 95%; margin: auto; position: relative;'>
+							<div class="wall" wallyti-block-margin="20">
+								<?php
+										$query = "SELECT * from gallery ORDER BY title";
+										$result = $db->query($query);
 
-									while($row = $result->fetch_assoc()){
-											$id = $row['id'];
-											$image = $row['image'];
-											$title = stripslashes($row['title']);
+										while($row = $result->fetch_assoc()){
+												$id = $row['id'];
+												$image = $row['image'];
+												$title = stripslashes($row['title']);
 
-											echo "<a class='wall-item' href='slideshow.php?id={$id}'>";
-												echo "<img src='images/gallery/{$image}' alt='{$title}' />";
-												echo "<h2>{$title}</h2>";
-											echo "</a>";
-									}
-							?>
-          	</div>
+												echo "<a class='wall-item' href='slideshow.php?id={$id}'>";
+													echo "<img src='images/gallery/{$image}' alt='{$title}' />";
+													echo "<h2>{$title}</h2>";
+												echo "</a>";
+										}
+								?>
+	          	</div>
+						</div>
           </div>
 			</div>
 		</div>
 
     <script>
+				$(function(){
+					$('.wall').wallyti(function(){});
+				});
+
         $(document).ready(function() {
-          $('.wall').jaliswall({item:'.wall-item'});
+          //$('.wall').jaliswall({item:'.wall-item'});
 
 					setTimeout(function () {
 						console.log("Test");
